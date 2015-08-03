@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "HypnosisView.h"
 @interface AppDelegate ()
 
 @end
@@ -15,8 +15,32 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+
+    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController=[[UIViewController alloc]init];
+    
+  // 创建两个cgrect结构分别作为UIScrollView对象和HypnosisView 对象的 fram
+    
+    CGRect screenRect=self.window.bounds;
+    CGRect bigRect=screenRect;
+    bigRect.size.width  *=2.0;
+   // bigRect.size.height *=2.0;
+    
+    UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:screenRect];
+    //scrollView.pagingEnabled=YES;
+    [self.window addSubview:scrollView];
+    
+    self.window.backgroundColor=[UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    
+    HypnosisView *hypnosisView=[[HypnosisView alloc]initWithFrame:bigRect];
+    [scrollView addSubview:hypnosisView];
+    
+    scrollView.contentSize=bigRect.size;
+    
+    
     return YES;
 }
 
